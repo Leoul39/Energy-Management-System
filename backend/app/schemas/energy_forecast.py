@@ -22,6 +22,14 @@ class EnergyForecastCreate(EnergyForecastBase):
     site_id: int = Field(..., gt=0)
 
 
+class EnergyForecastUpdate(OrmBaseModel):
+    """Request schema for partially updating an energy forecast."""
+
+    forecast_time: datetime | None = None
+    predicted_kwh: Decimal | None = Field(default=None, ge=0, max_digits=10, decimal_places=2)
+    model_name: str | None = Field(default=None, max_length=50)
+
+
 class EnergyForecastRead(EnergyForecastBase):
     """Response schema for returning an energy forecast."""
 

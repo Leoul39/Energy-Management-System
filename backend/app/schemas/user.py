@@ -20,6 +20,14 @@ class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=128)
 
 
+class UserUpdate(OrmBaseModel):
+    """Request schema for partially updating a user."""
+
+    full_name: str | None = Field(default=None, min_length=1, max_length=100)
+    email: EmailStr | None = Field(default=None, max_length=100)
+    password: str | None = Field(default=None, min_length=8, max_length=128)
+
+
 class UserRead(UserBase):
     """Response schema for returning a user."""
 

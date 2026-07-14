@@ -22,6 +22,14 @@ class EnergyReadingCreate(EnergyReadingBase):
     device_id: int = Field(..., gt=0)
 
 
+class EnergyReadingUpdate(OrmBaseModel):
+    """Request schema for partially updating an energy reading."""
+
+    reading_time: datetime | None = None
+    power_kw: Decimal | None = Field(default=None, ge=0, max_digits=10, decimal_places=2)
+    energy_kwh: Decimal | None = Field(default=None, ge=0, max_digits=10, decimal_places=2)
+
+
 class EnergyReadingRead(EnergyReadingBase):
     """Response schema for returning an energy reading."""
 

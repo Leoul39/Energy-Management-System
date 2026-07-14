@@ -21,6 +21,13 @@ class SolarGenerationCreate(SolarGenerationBase):
     device_id: int = Field(..., gt=0)
 
 
+class SolarGenerationUpdate(OrmBaseModel):
+    """Request schema for partially updating a solar generation record."""
+
+    generated_at: datetime | None = None
+    generated_kwh: Decimal | None = Field(default=None, ge=0, max_digits=10, decimal_places=2)
+
+
 class SolarGenerationRead(SolarGenerationBase):
     """Response schema for returning a solar generation record."""
 

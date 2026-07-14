@@ -28,6 +28,20 @@ class BatteryStatusCreate(BatteryStatusBase):
     device_id: int = Field(..., gt=0)
 
 
+class BatteryStatusUpdate(OrmBaseModel):
+    """Request schema for partially updating a battery status record."""
+
+    recorded_at: datetime | None = None
+    charge_percent: Decimal | None = Field(
+        default=None,
+        ge=0,
+        le=100,
+        max_digits=5,
+        decimal_places=2,
+    )
+    charge_kwh: Decimal | None = Field(default=None, ge=0, max_digits=10, decimal_places=2)
+
+
 class BatteryStatusRead(BatteryStatusBase):
     """Response schema for returning a battery status record."""
 
